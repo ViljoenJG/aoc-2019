@@ -45,7 +45,7 @@ const part2 = input => {
   for (let a = 1; a <= 99; a++) {
     for (let b = 1; b <= 99; b++) {
       const program = reset(baseProgram, a, b);
-      const res = computer(program);
+      computer(program);
 
       if (program[0] === 19690720) return a * 100 + b;
     }
