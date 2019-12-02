@@ -1,23 +1,15 @@
 const parseInput = input => input.split("\n").map(x => parseInt(x));
 
-const calcFuelRequired = module => Math.floor(module / 3) - 2;
-const calcTotalModuleFuel = module => {
-  let total = 0;
-  let tmp = module;
+const calcFuelRequired = module => {
+  const fuel = Math.floor(module / 3) - 2;
+  if (fuel <= 0) return 0;
+  return fuel;
+};
 
-  while (tmp > 0) {
-    const fuel = calcFuelRequired(tmp);
-
-    if (fuel <= 0) {
-      tmp = 0;
-      return total;
-    }
-
-    tmp = fuel;
-    total += fuel;
-  }
-
-  return total;
+const calcTotalFuel = (module, total = 0) => {
+  if (module == 0) return total;
+  const moduleFuel = calcFuelRequired(module);
+  return calcTotalFuel(moduleFuel, total + moduleFuel);
 };
 
 const part1 = input =>
@@ -27,7 +19,7 @@ const part1 = input =>
 
 const part2 = input =>
   parseInput(input)
-    .map(x => calcTotalModuleFuel(x))
+    .map(x => calcTotalFuel(x))
     .reduce((a, b) => a + b);
 
 module.exports = { part1, part2 };
