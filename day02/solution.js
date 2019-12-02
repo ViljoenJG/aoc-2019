@@ -42,14 +42,12 @@ const part1 = input => {
 const part2 = input => {
   const baseProgram = parseInput(input);
 
-  while (true) {
-    for (let a = 1; a <= 99; a++) {
-      for (let b = 1; b <= 99; b++) {
-        const program = reset(baseProgram, a, b);
-        const res = computer(program);
+  for (let a = 1; a <= 99; a++) {
+    for (let b = 1; b <= 99; b++) {
+      const program = reset(baseProgram, a, b);
+      const res = computer(program);
 
-        if (program[0] === 19690720) return a * 100 + b;
-      }
+      if (program[0] === 19690720) return a * 100 + b;
     }
   }
 };
